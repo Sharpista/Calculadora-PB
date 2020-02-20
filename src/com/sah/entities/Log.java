@@ -5,22 +5,27 @@ import java.util.List;
 
 public class Log {
 
-	private List<OperacaoService> listaDeOperacoes = new ArrayList<OperacaoService>();
+	private List<String> listaDeOperacoes = new ArrayList<String>();
 
-	public List<OperacaoService> getListaDeOperacoes() {
+	public List<String> getListaDeOperacoes() {
 		return listaDeOperacoes;
 	}
 	
-	public void adicionarOperacao(OperacaoService operacaoService) {
+	public void adicionarOperacao(String operacaoService) {
 		listaDeOperacoes.add(operacaoService);
 	}
-	public Object[] converterLista(List<?> listDeOperacoes) {
-		Object[] array;
-		array = listaDeOperacoes.toArray();
-		for(int i = 0 ; i <= array.length; i++) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(array[i].toString());
+	public String retornarLog() {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for (String string : listaDeOperacoes) {
+			sb.append(string + "\n");
+			return string;
 		}
-		return array;
+		
+		return null;
+		
 	}
+	
+	
 }

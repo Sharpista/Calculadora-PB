@@ -3,7 +3,7 @@ package com.sah.main;
 import javax.swing.JOptionPane;
 
 import com.sah.entities.Log;
-import com.sah.entities.OperacaoService;
+import com.sah.entities.Calculadora;
 
 public class Main {
 
@@ -14,7 +14,7 @@ public class Main {
 	private static void menu() {
 		boolean continua = true;				
 		int opcao;
-		OperacaoService operacoes = new OperacaoService();
+		Calculadora operacoes = new Calculadora();
 		Log log = new Log();
 			while(continua == true){
 				try {
@@ -23,10 +23,8 @@ public class Main {
 					if (opcao == 6) {
 						continua = false;
 					} else if(opcao == 5){
-						for (OperacaoService sb : log.getListaDeOperacoes()) {
-							JOptionPane.showMessageDialog(null, log.converterLista(log.getListaDeOperacoes()));
-							//JOptionPane.showMessageDialog(null, sb.primeiroNumero + "+" + sb.segundoNumero + "=" + sb.getResultado());
-						}
+						JOptionPane.showMessageDialog(null, log.retornarLog());
+						
 					} 
 					else  {
 						operacoes.primeiroNumero = Double.parseDouble(JOptionPane.showInputDialog("Entre com um número."));
@@ -60,6 +58,5 @@ public class Main {
 				}	
 			}
 	}
-	//TODO: Tratar entrada nula.
-	//TODO: Não chamar num1 e num2 quando opção for diferente de um número de 1 a 5.
+	
 }
