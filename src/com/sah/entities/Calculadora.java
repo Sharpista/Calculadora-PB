@@ -1,27 +1,71 @@
 package com.sah.entities;
 
-import java.io.Serializable;
-
 import javax.swing.JOptionPane;
 
 public class Calculadora implements IOperacoes {
 
 
 	private double resultado = 0.0;
-	public double primeiroNumero;
-	public double segundoNumero;
-	private Log log;
+	private double primeiroNumero;
+	private double segundoNumero;
+	private Logs logs;
 	
 	
+	public Calculadora() {
+		logs = new Logs();
+	}
 	public Calculadora(double resultado, double primeiroNumero, double segundoNumero) {
 		super();
 		this.resultado = resultado;
 		this.primeiroNumero = primeiroNumero;
 		this.segundoNumero = segundoNumero;
-		log = new Log();
+		logs = new Logs();
 	}
 
+	@Override
+	public void adicao() {
+		
+		resultado = primeiroNumero + segundoNumero;
+		String op = null;
+		op =  primeiroNumero + "+" + segundoNumero + "=" + resultado;
+		logs.adicionarOperacao(op);
+		
+	}
 
+	@Override
+	public double divisao() {
+		try {
+			String op = null;
+			resultado = primeiroNumero / segundoNumero;
+			op = primeiroNumero + "/" + segundoNumero + "=" + resultado;
+			logs.adicionarOperacao(op);
+		} catch (ArithmeticException  e) {
+			JOptionPane.showMessageDialog(null, "ERRO: Divisão por 0.");	
+		}
+		return resultado;
+	}
+
+	@Override
+	public double multiplicacao() {
+		String op = null;
+		resultado = primeiroNumero * segundoNumero;
+		op = primeiroNumero + "*" + segundoNumero + "=" + resultado;
+		logs.adicionarOperacao(op);
+		return resultado;
+	}
+
+	@Override
+	public double subtracao() {
+		String op = null;
+		resultado = primeiroNumero - segundoNumero;
+		op = primeiroNumero + "-" + segundoNumero + "=" + resultado;
+		logs.adicionarOperacao(op);
+		return resultado;
+	}
+	public StringBuilder getLog() {
+		return logs.retornarLog();
+		
+	}
 	public double getResultado() {
 		return resultado;
 	}
@@ -45,38 +89,14 @@ public class Calculadora implements IOperacoes {
 	public void setSegundoNumero(double segundoNumero) {
 		this.segundoNumero = segundoNumero;
 	}
-
-
-	@Override
-	public double adicao() {
-		String op = null; 
-		resultado = primeiroNumero + segundoNumero;
-		op = primeiroNumero + "+" + segundoNumero + "=" + resultado;
-		log.adicionarOperacao(op);
-		return resultado; 
-		
+	public void setResultado(double resultado) {
+		this.resultado = resultado;
 	}
-
-	@Override
-	public double divisao() {
-		try {
-			resultado = primeiroNumero / segundoNumero;
-		} catch (ArithmeticException  e) {
-			JOptionPane.showMessageDialog(null, "ERRO: Divisão por 0.");	
-		}
-		return resultado;
+	public Logs getLogs() {
+		return logs;
 	}
-
-	@Override
-	public double multiplicacao() {
-		resultado = primeiroNumero * segundoNumero;
-		return resultado;
-	}
-
-	@Override
-	public double subtracao() {
-		resultado = primeiroNumero - segundoNumero;
-		return resultado;
+	public void setLogs(Logs logs) {
+		this.logs = logs;
 	}
 
 

@@ -2,7 +2,7 @@ package com.sah.main;
 
 import javax.swing.JOptionPane;
 
-import com.sah.entities.Log;
+import com.sah.entities.Logs;
 import com.sah.entities.Calculadora;
 
 public class Main {
@@ -15,7 +15,7 @@ public class Main {
 		boolean continua = true;				
 		int opcao;
 		Calculadora operacoes = new Calculadora();
-		Log log = new Log();
+
 			while(continua == true){
 				try {
 					
@@ -23,34 +23,30 @@ public class Main {
 					if (opcao == 6) {
 						continua = false;
 					} else if(opcao == 5){
-						JOptionPane.showMessageDialog(null, log.retornarLog());
+						JOptionPane.showMessageDialog(null, operacoes.getLog());
 						
 					} 
 					else  {
-						operacoes.primeiroNumero = Double.parseDouble(JOptionPane.showInputDialog("Entre com um número."));
-						operacoes.segundoNumero = Double.parseDouble(JOptionPane.showInputDialog("Entre com outro número."));				
+						operacoes.setPrimeiroNumero(Double.parseDouble(JOptionPane.showInputDialog("Entre com um número.")));
+						operacoes.setSegundoNumero(Double.parseDouble(JOptionPane.showInputDialog("Entre com outro número.")));				
 						switch (opcao) {
 						case 1:
 							operacoes.adicao();
-							JOptionPane.showMessageDialog(null, operacoes.primeiroNumero + " + " + operacoes.segundoNumero + " = " + operacoes.getResultado());
 							break;
 						case 2:		
 							operacoes.divisao();
-							JOptionPane.showMessageDialog(null, operacoes.primeiroNumero + " / " + operacoes.segundoNumero + " = " + operacoes.getResultado());
 							break;
 						case 3:
 							operacoes.multiplicacao();
-							JOptionPane.showMessageDialog(null, operacoes.primeiroNumero + " x " + operacoes.segundoNumero + " = " + operacoes.getResultado());
 							break;
 						case 4:		
 							operacoes.subtracao();
-							JOptionPane.showMessageDialog(null, operacoes.primeiroNumero + " - " + operacoes.segundoNumero + " = " + operacoes.getResultado());
 							break;
 						default:
 							JOptionPane.showMessageDialog(null, "Favor escolher uma opção válida de 1 à 5.");
 							break;
 						}
-						log.adicionarOperacao(operacoes);
+						
 					}
 					
 				} catch (NumberFormatException e) {
